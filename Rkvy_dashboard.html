@@ -1,0 +1,1240 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0-rc.1/Chart.js"></script>
+
+<style>
+.badge-light
+{
+	font-size:0.9rem;
+}
+.btn
+{
+	padding: -10px;
+}
+
+.col-4
+{
+	padding: 2px;
+}
+
+.navbar-brand
+{
+	font-weight:600;
+	color:#fff !important;
+	font-size:1.2rem;
+}
+.nav-item a.nav-link
+{
+	font-weight:600;
+	color:#fff !important;
+	font-size:1rem;
+}
+.input-row
+{
+	width:100%;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+	margin:0px;
+}
+.input-lbl
+{
+	font-weight:600;
+	color:#4d4d4d;
+	font-size:13px;
+}
+.navbar-input
+{
+	padding:0px;
+	padding-top:5px;
+	margin-bottom:10px;
+}
+.sel-list
+{
+	font-size:14px;
+	font-weight:500;
+	color:#aeaeae;
+	height:40px !important;
+
+}
+.col-stats
+{
+	padding:4px;
+}
+.col-stats .card
+{
+	border-radius:0px;
+}
+.bg-stat3
+{
+background: #799F0C;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #28B463, #799F0C);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #28B463, #799F0C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.bg-stat2
+{
+background: #8E2DE2;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.bg-stat1
+{
+background: #f12711;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E74C3C, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E74C3C, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.bg-stat4
+{
+background: #D31027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #EA384D, #D31027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #EA384D, #D31027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.bg-stat5
+{
+background: #ec008c;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #fc6767, #ec008c);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #fc6767, #ec008c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.bg-stat6
+{
+background: #009FFF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2E86C1, #009FFF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2E86C1, #009FFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+h6
+{
+	font-weight:600;
+	color:#fff;
+	font-size:13px;
+	text-transform:uppercase;
+	padding: -px
+}
+.table-stats
+{
+	margin-bottom:0px;
+}
+.table-stats td
+{
+	font-size:13px;
+	padding:5px;
+	font-weight:500;
+	color:#fff;
+}
+.table-stats td.val
+{
+	font-size:13px;
+	padding:5px;
+	font-weight:700;
+	color:#fff;
+	cursor:pointer;
+}
+.table-stats td span:hover
+{
+	color:#b32400;
+
+}
+.col-stats .card-header
+{
+	font-size:14px;
+	font-weight:600;
+	padding: 2px;
+}
+.col-stats .card-header select
+{
+	font-size:13px;
+	font-weight:600;
+	margin-top: 10rem;
+	padding: 2px;
+}
+.stats-table
+{
+	margin-bottom:0px;
+	padding: -2rem;
+}
+.stats-table th
+{
+	font-size:13px;
+	padding:5px;
+	font-weight:500;
+	color:#fff;
+	background:#BA4A00;
+}
+.col-stats .card-body
+{
+	padding:2px;
+}
+.hglt-header
+{
+	background:#fff;
+	font-weight:600;
+	color:#21618C;
+	font-size:14px;
+}
+.footer-navbar
+{
+	font-size:13px;
+	font-weight:600;
+	text-align:center;
+	width:100%;
+	box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.2);
+}
+
+td.green
+{
+	font-weight:500;
+	color:green;
+}
+td.red
+{
+	font-weight:500;
+	color:red;
+}
+</style>
+</head>
+<body>
+	kk
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-input" >
+  	<div class="row input-row" >
+
+
+  	<div class="col-lg-2 col-sm-6">
+        <div class="form-group">
+        	<label class="input-lbl" for="State">State</label>
+        	<select class="form-control sel-list" id="selState" name="selState"  >
+				<!-- onchange="fetch_state_wise_reg()" -->
+				<option value="">Select state</option>
+				<option value="">All</option>
+
+				{% for sta in liststa %}
+                 <option value="{{ sta }}">{{ sta }}</option>
+            	 {% endfor %}
+
+				 <!-- {% for sta in liststa %}
+                 <option value="{{ sta }}">{{ sta }}</option>
+            	 {% endfor %} -->
+			</select>
+        </div>
+    </div>
+  	<div class="col-lg-2 col-sm-6">
+        <div class="form-group">
+        	<label class="input-lbl">Rly-Zone</label>
+                    <select class="form-control sel-list" id="selZone">
+						<option value="">Select Rly-Zone</option>
+						<option value="">All</option>
+
+                        {% for head in listhq %}
+                        <option value="{{ head }}">{{ head }}</option>
+                        {% endfor %}
+					</select>
+       		 </div>
+   	 </div>
+  	<div class="col-lg-2 col-sm-6">
+        <div class="form-group">
+        	<label class="input-lbl">Institute</label>
+        	<select class="form-control sel-list" id="selInstitute">
+				<option value="">Select Institute</option>
+				<option value="">All</option>
+
+						{% for ins in listins %}
+						<option value="{{ ins.1 }}">{{ ins.0 }}</option>
+						{% endfor %}
+				</select>
+			</div>
+    	</div>
+  	
+  	<div class="col-lg-2 col-sm-6">
+        <div class="form-group">
+        	<label class="input-lbl">Notifications</label>
+        	<select class="form-control sel-list" id="selnoti">
+				<option value="">Select Notification</option>
+				<option value="">ALL</option>
+				{% for notification in listnoti %}
+                <option value="{{ notification }}">{{ notification }}</option>
+                {% endfor %}
+			</select>
+        </div>
+    </div>
+  	<div class="col-lg-2 col-sm-6">
+        <div class="form-group">
+        	<label class="input-lbl">Trades</label>
+        	<select class="form-control sel-list" id="seltrade">
+				<option value="">Select Trades</option>
+				<option>All</option>
+				{% for tra in listtra %}
+				<option value="{{ tra }}">{{ tra }}</option>
+				{% endfor %}
+			</select>
+        </div>
+    </div>
+	<div class="col-lg-1 col-sm-3">
+        <div class="form-group">
+        	<label class="input-lbl">Gender</label>
+        	<select class="form-control sel-list" id="selGender">
+				<!-- <option value="">Select Gender</option> -->
+			<option value="">All</option>
+			<option value="Male">Male</option>
+			<option value="Female">Female</option>
+
+			</select>
+        </div>
+    </div>
+	<div class="col-lg-1 col-sm-3">
+        <div class="form-group">
+        	<button class="btn btn-success mt-4" onclick="fetchData();">Continue</button>
+        </div>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid" >
+<div class="row">
+<div class="col-2 col-stats">
+<div class="card card-hover">
+<div class="box bg-stat1 text-center">
+  <h1 class="font-light text-white">
+	<i class="mdi mdi-receipt"></i>
+  </h1>
+  <h6 class="text-white">Participation</h6>
+  <table class="table table-stats">
+  	<tr>
+  		<td>State</td>
+  		<td>Rly</td>
+  		<td>Institute</td>
+  	</tr>
+  	<tr>
+  		<td><span class="badge badge-light">{{state}}</span></td>
+  		<td><span class="badge badge-light">{{railway}}</span></td>
+  		<td><span class="badge badge-light">{{institute}}</span></td>
+  	</tr>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-2 col-stats">
+<div class="card card-hover">
+<div class="box bg-stat2 text-center">
+  <h1 class="font-light text-white">
+	<i class="mdi mdi-receipt"></i>
+  </h1>
+  <h6 class="text-white">Capacity</h6>
+  <table class="table table-stats">
+  	<tr>
+  		<td>Trades</td>
+  		<td>Seats</td>
+  	</tr>
+  	<tr>
+  		<td class="val" ><span class="badge badge-light" id="cbody1">{{trades}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody2">{{seat}}</span></td>
+  	</tr>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-2 col-stats">
+<div class="card card-hover">
+<div class="box bg-stat3 text-center">
+  <h1 class="font-light text-white">
+	<i class="mdi mdi-receipt"></i>
+  </h1>
+  <h6 class="text-white">Completed</h6>
+  <table class="table table-stats">
+  	<tr>
+  		<td>Male</td>
+  		<td>Female</td>
+  		<td>Total</td>
+  	</tr>
+  	<tr>
+  		<td class="val" ><span class="badge badge-light" id="cbody3">{{mal}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody4">{{fmal}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody5">{{trained}}</span></td>
+  	</tr>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-2 col-stats">
+<div class="card card-hover">
+<div class="box bg-stat4 text-center">
+  <h1 class="font-light text-white">
+	<i class="mdi mdi-receipt"></i>
+  </h1>
+  <h6 class="text-white">Under Training</h6>
+  <table class="table table-stats">
+  	<tr>
+  		<td>Male</td>
+  		<td>Female</td>
+  		<td>Total</td>
+  	</tr>
+  	<tr>
+  		<td class="val" ><span  class="badge badge-light" id="cbody6">{{male}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody7">{{female}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody8">{{total_undertraining}}</span></td>
+  	</tr>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-2 col-stats">
+<div class="card card-hover">
+<div class="box bg-stat5 text-center">
+  <h1 class="font-light text-white">
+	<i class="mdi mdi-receipt"></i>
+  </h1>
+  <h6 class="text-white">Employed</h6>
+  <table class="table table-stats">
+  	<tr>
+  		<td>Private</td>
+  		<td>Govt</td>
+  		<td>Total</td>
+  	</tr>
+  	<tr>
+  		<td class="val" ><span class="badge badge-light" id="cbody9">{{pvt}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody10">{{govn}}</span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody11">{{employed}}</span></td>
+  	</tr>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-2 col-stats">
+<div class="card card-hover">
+<div class="box bg-stat6 text-center">
+  <h1 class="font-light text-white">
+	<i class="mdi mdi-receipt"></i>
+  </h1>
+  <h6 class="text-white">Seat Availability</h6>
+  <table class="table table-stats">
+  	<tr>
+  		<td>Total/Vacant</td>
+  		<td>Filled</td>
+  		<td>Dropout</td>
+  	</tr>
+  	<tr>
+  		<td class="val" ><span class="badge badge-light" id="cbody12"></span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody13"></span></td>
+  		<td class="val" ><span class="badge badge-light" id="cbody14"></span></td>
+  	</tr>
+  </table>
+</div>
+</div>
+</div>
+</div>
+
+<hr >
+<div class="row" style="margin: -1rem;">
+
+	<div class="col-3 col-stats">
+		<div class="card" >
+			<div class="card-header"  class="cardmargin">Trainings Registration</div>
+			<div class="card-body" id="divReg">
+			<table class="stats-table table table-striped">
+				<thead ><tr><th>Year</th><th>Count</th><th>% Growth</th></tr></thead>
+					<tbody id = "tbody1" style="line-height: 0.5;">
+					</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-3 col-stats">
+		<div class="card">
+			<div class="card-header">Trainings Enrollments</div>
+			<div class="card-body" id="divTrng">
+			<table class="stats-table table table-striped">
+				<thead><tr><th>Year</th><th>Count</th><th>% Growth</th></tr></thead>
+				<tbody id = "tbody2" style="line-height: 0.5;">
+			</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-3 col-stats">
+		<div class="card">
+			<div class="card-header">Trainings Completed</div>
+			<div class="card-body" id="divTrngcmpl">
+			<table class="stats-table table table-striped">
+				<thead><tr><th>Year</th><th>Count</th><th>% Growth</th></tr></thead>
+				<tbody id = "tbody3" style="line-height: 0.5;"></tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-3 col-stats">
+		<div class="card" class="yes">
+			<div class="card-header">Employment</div>
+			<div class="card-body" id="divEmp">
+			<table class="stats-table table table-striped">
+				<thead><tr><th>Year</th><th>Count</th><th>% Growth</th></tr></thead>
+				<tbody id = "tbody4" style="line-height: 0.5;"></tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<hr/>
+<!---Top railways,state,trades,Institutes-->
+<div class = "btn-group d-flex" role="group">
+         <button type = "button" class="btn btn-outline-primary w-100"  onclick="drawTopChart('Complete');">Training Completion</button>
+         <button type = "button" class="btn btn-outline-primary w-100" onclick="drawTopChart('Employed');" >Employed</button>
+         <button type = "button" class="btn btn-outline-primary w-100" onclick="drawTopChart('Enrolled');" >Enrolled Ratio</button>
+         <button type = "button" class="btn btn-outline-primary w-100"  onclick="drawTopChart('Feedback');">Feedback</button>
+</div>
+
+<div class="col-12" style="width: -100%;">
+<div>
+	<div style="width: 100%;" >
+	<div class="row">
+
+		<div class="col-4"  >
+		<div class="card"  >
+			
+			<div class="card-header hglt-header" style="line-height: 0.5;">Top 5 Railways</div>
+				<div class="card-body" style="line-height: 0.8;padding: 0.5px";>
+					<canvas id="myBarChart" height="120" width="300" style="display: block; width: 370px; height: 300px;"></canvas>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4" >
+		<div class="card">
+			<div class="card-header hglt-header" style="line-height: 0.5;">Top 5 Institutes</div>
+				<div class="card-body" style="line-height: 0.8;padding: 0.5px";>
+					<canvas id="myBarChart1" height="120" width="300" style="display: block; width: 370px; height: 300px;"></canvas>	
+				</div>
+			</div>
+		</div>
+
+		<div class="col-4">
+		<div class="card"  >
+			<div class="card-header hglt-header" style="line-height: 0.5;">Top 5 Trades</div>
+				<div class="card-body" style="padding: 0.5px";>
+					<canvas id="myBarChart2" height="120" width="300" style="display: block; width: 370px; height: 300px;"></canvas>
+				</div>
+		</div>
+		</div>
+
+		</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<br>
+<nav class="navbar fixed-bottom navbar-light bg-light footer-navbar" >
+  Copyright &copy; 2023 Designed and Developed by Tanya singh (CRIS)
+</nav>
+</div>
+<div id="loadingmodal" class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm" role="document">
+	  <div class="modal-content">
+		<div class="modal-body" align="center">
+			<img src="{% static 'rkvy/images/loading.gif' %}" style="width:100px;height: 100px;">
+		  <p>loading please wait.....</p>
+		</div>
+
+	  </div>
+	</div>
+</div>
+<script>
+	var myrlyChart;
+	var myinstChart;
+	var mytradesChart;
+    $(document).ready(function(){
+          drawBarChart();
+          drawBarChart1();
+		  drawBarChart2();
+        });		
+		function drawTopChart(in_ctgr)
+		{
+            var label_array={{list3 | safe}};
+            var color_array=[ "#3498db","#2ecc71","#DC143C","#f1c40f","#FF0000"];
+			var toprlylabel=[]
+			var toprlylist=[]
+			var topinstlabel=[]
+			var topinstlabelfull=[]
+			var topinstlist=[]
+			var toptradelabel=[]
+			var toptradelist=[]
+			var mydata = 
+			{
+            in_ctgr,
+			}
+			$.ajax({
+            url: "{% url 'topChart' %}",
+            method: "GET",
+            dataType: "json",
+            data: mydata,
+            success: function (data) {
+			console.log(data)
+                for(var i=0;i<data.listrly.length;i++){
+					toprlylist.push(Number(data.listrly[i][2]));
+					toprlylabel.push(data.listrly[i][1]);
+				}
+				for(var i=0;i<data.listinst.length;i++){
+					topinstlist.push(Number(data.listinst[i][2]));
+					topinstlabel.push((data.listinst[i][1]).substring(0,6));
+					topinstlabelfull.push(data.listinst[i][1]);
+				}
+				for(var i=0;i<data.listrades.length;i++){
+					toptradelist.push(Number(data.listrades[i][2]));
+					toptradelabel.push(data.listrades[i][1]);
+				}	
+            var ctx = document.getElementById("myBarChart").getContext('2d');
+			if(myrlyChart!=undefined) 
+			{
+				myrlyChart.destroy();
+			}
+             myrlyChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels:toprlylabel ,
+                datasets: [{
+                      backgroundColor: color_array ,
+                      data: toprlylist
+						 }]
+				
+                    }
+            });
+
+			var ctx = document.getElementById("myBarChart1").getContext('2d');
+			if(myinstChart!=undefined) 
+			{
+				myinstChart.destroy();
+			}
+			
+             myinstChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels:topinstlabel ,
+                datasets: [{
+                      backgroundColor: color_array ,
+                      data: topinstlist
+                }]
+                    }
+            });
+
+			var ctx = document.getElementById("myBarChart2").getContext('2d');
+			if(mytradesChart!=undefined) 
+			{
+				mytradesChart.destroy();
+			}
+             mytradesChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels:toptradelabel,
+                datasets: [{
+                      backgroundColor: color_array ,
+                      data: toptradelist
+                }]
+                    }
+            });
+			}})
+		}	
+        var data_arr1 = {{list2 | safe}};
+        function drawBarChart()
+        {
+            var label_array1={{list1 | safe}};
+            var color_array=[ "#3498db","#2ecc71 ","#DC143C","#f1c40f","#FF0000"];
+			var ctx = document.getElementById("myBarChart").getContext('2d');
+			if(myrlyChart!=undefined) 
+			{
+				myrlyChart.destroy();
+			}
+			myrlyChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels:label_array1,
+                datasets: [{
+                      backgroundColor: color_array ,
+                      data: data_arr1
+					  
+                }]				
+              }, options:{
+                    legend:{
+                        display:false
+                    },
+                }
+			 });
+        }
+        
+		var data_arr2 = {{list4 | safe}};
+        function drawBarChart1()
+        {
+            var label_array1={{list3 | safe}};
+            var color_array=[ "#3498db","#2ecc71 ","#DC143C","#f1c40f","#FF0000"];
+			var ctx = document.getElementById("myBarChart1").getContext('2d');
+			if(myinstChart!=undefined) 
+			{
+				myinstChart.destroy();
+			}
+            myinstChart  = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels:label_array1,
+                datasets: [{
+                      backgroundColor: color_array ,
+                      data: data_arr2}]
+              		},
+                      options:{
+                    legend:{
+                        display:false
+                    },
+                }
+
+            							});
+        }
+
+		var data_arr3 = {{list66 | safe}};
+        function drawBarChart2()
+        {
+            var label_array1={{list55 | safe}};
+            var color_array=[ "#3498db","#2ecc71","#DC143C","#f1c40f","#FF0000"];
+			var ctx = document.getElementById("myBarChart2").getContext('2d');
+			if(mytradesChart!=undefined) 
+			{
+				mytradesChart.destroy();
+			}
+             mytradesChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels:label_array1,
+                datasets: [{
+                      backgroundColor: color_array ,
+                      data: data_arr3}]
+             		 },
+                options:{
+                    legend:{
+                        display:false
+                    },
+                }
+          								  });
+        }
+		// javascripts for State wise filters
+		$(document).ready(function()
+		{
+			$("#selState").change(function(){
+				var crntstate=$(this).val();
+				if(crntstate!="")
+				{
+						$("#selZone").attr("disabled","disabled");
+				}
+				else
+				{
+					$("#selZone").removeAttr("disabled");
+				}
+				fetch_state_institute(crntstate);
+				
+			})
+			updateStateData("","","","","","");
+		// javascripts for zone wise filters
+			$("#selZone").change(function(){
+				var crntzone=$(this).val();
+				if(crntzone!="")
+				{
+						$("#selState").attr("disabled","disabled");
+				}
+				else
+				{
+					$("#selState").removeAttr("disabled");
+				}
+				fetch_zone_institute(crntzone);
+				})
+			updateStateData("","","","","","");
+			
+		});
+		function fetch_state_institute(in_state) {
+        event.preventDefault();
+		
+        var mydata = {
+            in_state,
+        };
+		$('#selInstitute').find('option').remove();
+        $.ajax({
+            
+            url: "{% url 'statewise_institute' %}",
+            method: "GET",
+            dataType: "json",
+            data: mydata,
+            success: function (data) {
+                
+                var items = "<option value=''>Select Institute</option><option value=''>ALL INSTITUTES</option>";
+                for (i = 0; i < data.institute.length; i++) 
+				{
+                    items += "<option value=" + data.institute[i].institute_code + ">" + data.institute[i].institute_name + "</option>";    
+                }
+                $("#selInstitute").append(items);
+                
+                $('#selInstitute').change(function(){
+                	var crntinst=$('#selInstitute').val();
+                	var instname=$( "#selInstitute option:selected" ).text();
+                	// alert("selected institute code:"+crntinst+", name:"+instname);
+                	//updateStateData(in_state, "", crntinst, "","","");
+                });
+				
+				$('#selnoti').change(function(){
+                	var crntnoti=$('#selnoti').val();
+                	var notiname=$( "#selnoti option:selected" ).text();
+                	// updateStateData(in_state, "", "","",crntnoti,"");
+                });
+				$('#seltrade').change(function(){
+                	var crntrade=$('#seltrade').val();
+                	var tradename=$( "#seltrade option:selected" ).text();
+                	// updateStateData(in_state, "", "","","",crntrade);
+                });
+				 },
+            error: function (req,err) {
+                            }
+        });
+		}
+		function fetch_zone_institute(in_zone) {
+		/*ajax call to fetch institute list*/
+        var mydata = {
+            in_zone,
+        };
+		$('#selInstitute').find('option').remove();
+        $.ajax({
+			url: "{% url 'zonewise_institute' %}",
+            type: "GET",
+            dataType: "json",
+            data: mydata,
+            success: function (data) {
+                var items = "<option value=''>Select Institute</option><option value=''>ALL INSTITUTES</option>";
+                console.log(data.institute.length)
+                for (i = 0; i < data.institute.length; i++) {
+                    console.log(i, data.institute[i].institute_name, data.institute[i].institute_code)
+                    items += "<option value=" + data.institute[i].institute_code + ">" + data.institute[i].institute_name + "</option>";}
+                $("#selInstitute").append(items);
+                
+                $('#selInstitute').change(function(){
+                	var crntinst=$('#selInstitute').val();
+                	var instname=$( "#selInstitute option:selected" ).text();
+                });
+				$('#selnoti').change(function(){
+                	var crntnoti=$('#selnoti').val();
+                	var notiname=$( "#selnoti option:selected" ).text();
+                });
+				$('#seltrade').change(function(){
+                	var crntrade=$('#seltrade').val();
+                	var tradename=$( "#seltrade option:selected" ).text();
+                });
+				 },
+            error: function () {
+                alert("Fetch_zone_institute");
+            }
+        });
+		}
+		function updateStateData(in_state, in_zone, in_institute, in_gender, in_noti, in_trade)
+		{
+			$("#loadingmodal").modal('show');
+			var statedata = {
+            	in_state,
+				in_institute,
+				in_gender,
+				in_noti,
+				in_trade,};
+			var zonedata = {
+            	in_zone,
+				in_institute,
+				in_gender,
+				in_noti,
+				in_trade,};
+			var institutedata = {
+				in_institute,
+				in_gender,
+				in_noti,
+				in_trade,};
+			var inptdata=statedata;
+			console.log("Zone:"+in_zone);
+			console.log("State:"+in_state);
+			console.log("Institute:"+in_institute);
+			console.log("Gender:"+in_gender);
+			console.log("Notification:"+in_noti);
+			console.log("Trade:"+in_trade);
+			var inpturl="{% url 'state_wise_reg' %}" ;
+
+			if((in_institute!=''))
+			{
+				inptdata=institutedata;
+				inpturl= "{% url 'institute_wise_reg' %}";
+			}
+			else if((in_state!=''))
+			{
+				inptdata=statedata;
+				inpturl= "{% url 'state_wise_reg' %}";
+			}
+			else if((in_zone!=''))
+			{
+				inptdata=zonedata;
+				inpturl="{% url 'zone_wise_reg' %}";
+			}
+			var htmlreg =''
+			var htmlenroll =''
+			var htmltrng =''
+			var htmlemploy =''
+			
+			var regdata=[];
+			var enrolldata=[];
+			var trngdata=[];
+			var employdata=[];
+			var regdatacntr=0;
+			var trngdatacntr=0;
+			var enrolldatacntr=0;
+			var employdatacntr=0;
+			$.ajax({
+            url: inpturl,
+            type: "GET",
+            dataType: "json",
+            data: inptdata,
+            success: function (data) 
+				{
+				var obj=data;
+				for(j=obj.user_data.length-1; j>=0; j--)
+				{
+				var arr=obj.user_data[j];
+                for (i = arr.length-1; i >=0 ; i--) {
+					if (arr[i][0]=='registered'){
+						regdata[regdatacntr]=new Array(3);
+						regdata[regdatacntr][0]=obj.year_registration[j];
+						regdata[regdatacntr][1]=arr[i][1];
+						regdata[regdatacntr][2]="0";
+						regdatacntr++;						
+						}
+					else if (arr[i][0]=='enrolled')
+					{
+						enrolldata[enrolldatacntr]=new Array(3);
+						enrolldata[enrolldatacntr][0]=obj.year_registration[j];
+						enrolldata[enrolldatacntr][1]=arr[i][1];
+						enrolldata[enrolldatacntr][2]="0";
+						enrolldatacntr++;						
+					}
+					else if (arr[i][0]=='trained')
+					{
+						trngdata[trngdatacntr]=new Array(3);
+						trngdata[trngdatacntr][0]=obj.year_registration[j];
+						trngdata[trngdatacntr][1]=arr[i][1];
+						trngdata[trngdatacntr][2]="0";
+						trngdatacntr++;						
+					}
+					else if (arr[i][0]=='employed')
+					{
+						employdata[employdatacntr]=new Array(3);
+						employdata[employdatacntr][0]=obj.year_registration[j];
+						employdata[employdatacntr][1]=arr[i][1];
+						employdata[employdatacntr][2]="0";
+						employdatacntr++;					 	
+					}
+					}
+				}
+	// registration-------------
+				for(var i=0;i<regdata.length;i++)
+				{
+					var changepctg=0;
+					var chnground=0;
+					// var denm=1;
+					if(i<=regdata.length-2)
+					{
+						// denm=Number(regdata[i+1][1]);
+						if((Number(regdata[i+1][1])==0) && (Number(regdata[i][1])>0))
+							changround=100;
+							else if((Number(regdata[i+1][1])>0) && (Number(regdata[i][1])==0))
+							{
+								changround=-100;	
+							}
+							else if((Number(regdata[i+1][1])==0) && (Number(regdata[i][1])==0))
+							{
+								htmlreg+='<tr><td>'+regdata[i][0]+'</td><td>'+regdata[i][1]+'</td><td class="green"></td></tr>';
+								continue;
+							}
+							else {
+								changepctg=((Number(regdata[i][1])-Number(regdata[i+1][1]))*100)/(regdata[i+1][1]);
+								chnground=Math.round(changepctg*10)/10;
+							}
+							// denm=1;
+
+						changepctg=((Number(regdata[i][1])-Number(regdata[i+1][1]))*100)/(regdata[i+1][1]);
+						chnground=Math.round(changepctg*10)/10;
+					}
+					if(i==(regdata.length-1))
+						htmlreg+='<tr><td>'+regdata[i][0]+'</td><td>'+regdata[i][1]+'</td><td class="green"></td></tr>';
+					else
+					{
+						if(chnground>0)
+							htmlreg+='<tr><td>'+regdata[i][0]+'</td><td>'+regdata[i][1]+'</td><td class="green">'+chnground+' %</td></tr>';
+						else
+							htmlreg+='<tr><td>'+regdata[i][0]+'</td><td>'+regdata[i][1]+'</td><td class="red">'+chnground+' %</td></tr>';
+					}
+				}	
+// training completed-------------------
+				for(var i=0;i<trngdata.length;i++)
+				{
+
+					var changepctg=0;
+					var chnground=0;
+					if(i<=trngdata.length-2)
+					{
+						// denm=Number(trngdata[i+1][1]);
+						if((Number(trngdata[i+1][1])==0) && (Number(trngdata[i][1])>0))
+							chnground=100;
+							else if((Number(trngdata[i+1][1])>0) && (Number(trngdata[i][1])==0))
+							{
+								changround=-100;	
+							}
+							else if((Number(trngdata[i+1][1])==0) && (Number(trngdata[i][1])==0))
+							{
+								htmltrng+='<tr><td>'+trngdata[i][0]+'</td><td>'+trngdata[i][1]+'</td><td class="green"></td></tr>';
+								continue;
+							}
+							else{
+								changepctg=((Number(trngdata[i][1])-Number(trngdata[i+1][1]))*100)/(trngdata[i+1][1]);
+								chnground=Math.round(changepctg*10)/10;
+							}			
+					}
+					if(i==(trngdata.length-1))
+						htmltrng+='<tr><td>'+trngdata[i][0]+'</td><td>'+trngdata[i][1]+'</td><td class="green"></td></tr>';
+					else
+					{
+						if(chnground>0)
+							htmltrng+='<tr><td>'+trngdata[i][0]+'</td><td>'+trngdata[i][1]+'</td><td class="green">'+chnground+' %</td></tr>';
+						else
+							htmltrng+='<tr><td>'+trngdata[i][0]+'</td><td>'+trngdata[i][1]+'</td><td class="red">'+chnground+' %</td></tr>';
+					}
+				}
+// enroll-------
+				for(var i=0;i<enrolldata.length;i++)
+								{
+									var changepctg=0;
+									var chnground=0;
+									if(i<=enrolldata.length-2)
+									{
+										// denm=Number(employdata[i+1][1]);
+										if((Number(enrolldata[i+1][1])==0) && (Number(enrolldata[i][1])>0))
+											chnground=100;
+											else if((Number(enrolldata[i+1][1])>0) && (Number(enrolldata[i][1])==0))
+											{
+												changround=-100;	
+											}
+											else if((Number(enrolldata[i+1][1])==0) && (Number(enrolldata[i][1])==0))
+											{
+												htmleroll+='<tr><td>'+enrolldata[i][0]+'</td><td>'+enrolldata[i][1]+'</td><td class="green"></td></tr>';
+												continue;
+											}
+											else{
+											changepctg=((Number(enrolldata[i][1])-Number(enrolldata[i+1][1]))*100)/(enrolldata[i+1][1]);
+											chnground=Math.round(changepctg*10)/10;
+											}
+									}
+									if(i==(enrolldata.length-1))
+										htmlenroll+='<tr><td>'+enrolldata[i][0]+'</td><td>'+enrolldata[i][1]+'</td><td class="green"></td></tr>';
+									else
+									{
+										if(chnground>0)
+											htmlenroll+='<tr><td>'+enrolldata[i][0]+'</td><td>'+enrolldata[i][1]+'</td><td class="green">'+chnground+' %</td></tr>';
+										else
+											htmlenroll+='<tr><td>'+enrolldata[i][0]+'</td><td>'+enrolldata[i][1]+'</td><td class="red">'+chnground+' %</td></tr>';
+									}
+								}
+// employment-------------
+				for(var i=0;i<employdata.length;i++)
+				{
+					var changepctg=0;
+					var chnground=0;
+					if(i<=employdata.length-2)
+					{
+						// denm=Number(employdata[i+1][1]);
+						if((Number(employdata[i+1][1])==0) && (Number(employdata[i][1])>0))
+							chnground=100;
+							else if((Number(employdata[i+1][1])>0) && (Number(employdata[i][1])==0))
+							{
+								changround=-100;	
+							}
+							else if((Number(employdata[i+1][1])==0) && (Number(employdata[i][1])==0))
+							{
+								htmlemploy+='<tr><td>'+employdata[i][0]+'</td><td>'+employdata[i][1]+'</td><td class="green"></td></tr>';
+								continue;
+							}
+							else{
+							changepctg=((Number(employdata[i][1])-Number(employdata[i+1][1]))*100)/(employdata[i+1][1]);
+							chnground=Math.round(changepctg*10)/10;
+							}
+					}
+					if(i==(employdata.length-1))
+						htmlemploy+='<tr><td>'+employdata[i][0]+'</td><td>'+employdata[i][1]+'</td><td class="green"></td></tr>';
+					else
+					{
+						if(chnground>0)
+							htmlemploy+='<tr><td>'+employdata[i][0]+'</td><td>'+employdata[i][1]+'</td><td class="green">'+chnground+' %</td></tr>';
+						else
+							htmlemploy+='<tr><td>'+employdata[i][0]+'</td><td>'+employdata[i][1]+'</td><td class="red">'+chnground+' %</td></tr>';
+					}
+				}
+
+
+				if((in_zone=="") && (in_institute=="") && (in_gender=="") && (in_noti=="") && (in_trade==""))
+				{
+					$("#tbody1").empty();
+					$("#tbody1").append(htmlreg);
+				}
+				$("#tbody2").empty();
+				$("#tbody2").append(htmlenroll);
+
+				$("#tbody3").empty();
+				$("#tbody3").append(htmltrng);
+
+				$("#tbody4").empty();
+				$("#tbody4").append(htmlemploy);
+				updateSummarycards(in_state, in_zone, in_institute)
+
+			},
+            error: function () {
+                alert("Update_State_Data");
+            }
+        });
+		}
+		// filters for summary cards-----------------------------------------------------------
+		function updateSummarycards(in_state, in_zone, in_institute)
+		{
+			var summary = {
+            	in_state,
+				in_institute,
+				in_zone,};
+
+			console.log("Zone:"+in_zone);
+			console.log("State:"+in_state);
+			console.log("Institute:"+in_institute);
+        	$.ajax({
+            url: "{% url 'cardsfilters' %}",
+            type: "GET",
+            dataType: "json",
+            data: summary,
+            success: function (data) 
+				{
+				console.log("call successful for summary cards update");
+				console.log("data received:"+data)
+				console.log(data);
+				var obj=data;
+				$("#cbody1").html("0");
+				$("#cbody2").html("0");
+				$("#cbody3").html("0");
+				$("#cbody4").html("0");
+				$("#cbody4").html("0");
+				$("#cbody5").html("0");
+				$("#cbody6").html("0");
+				$("#cbody7").html("0");
+				$("#cbody8").html("0");
+				$("#cbody9").html("0");
+				$("#cbody10").html("0");
+				$("#cbody11").html("0");
+				var totalseats=0;
+					var filledseats=0;
+					var dropoutseats=0;
+					var vacantseats=0;
+			
+			  for(var i=0;i<obj.listSmry.length;i++)
+				{
+					if(obj.listSmry[i].category=="TRADES_SEATS")
+					{
+						$("#cbody1").html(obj.listSmry[i].count1);
+						$("#cbody2").html(obj.listSmry[i].count2);
+					}
+					if(obj.listSmry[i].category=="TRAINING_COMPLETED_MALE")
+					{
+						$("#cbody3").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="TRAINING_COMPLETED_FEMALE")
+					{
+						$("#cbody4").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="TRAINING_COMPLETED_TOTAL")
+					{
+						$("#cbody5").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="UNDER_TRAINING_MALE")
+					{
+						$("#cbody6").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="UNDER_TRAINING_FEMALE")
+					{
+						$("#cbody7").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="UNDER_TRAINING_TOTAL")
+					{
+						$("#cbody8").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="EMPLOYED_PRIVATE")
+					{
+						$("#cbody9").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="EMPLOYED_GOVERNMENT")
+					{
+						$("#cbody10").html(obj.listSmry[i].count1);
+					}
+					if(obj.listSmry[i].category=="EMPLOYED_TOTAL")
+					{
+						$("#cbody11").html(obj.listSmry[i].count1);
+					}
+					
+					if(obj.listSmry[i].category=="TOTAL_SEATS") {
+					totalseats=Number(obj.listSmry[i].count1);
+					}
+					console.log(totalseats);
+					console.log(obj.listSmry[i].Count1);
+
+					if(obj.listSmry[i].category=="SEATS_FILLED"){
+					filledseats=Number(obj.listSmry[i].count1);
+					}
+					console.log(filledseats + 'kucch print kara lete hai');
+					console.log(obj.listSmry[i].count1 + 'ek baar aur kuchh print kara lete hai');
+
+					if(obj.listSmry[i].category=="SEATS_DROPOUT"){
+					dropoutseats=Number(obj.listSmry[i].count1);
+					}
+					
+					vacantseats=totalseats-filledseats-dropoutseats;
+
+					$("#cbody12").html(totalseats+"/"+vacantseats);
+					$("#cbody13").html(filledseats.toString());
+					$("#cbody14").html(dropoutseats);
+
+				}
+				$("#loadingmodal").modal('hide');
+
+			},
+			
+			
+            error: function () {
+                alert("Summary_cards_error");
+            }
+			
+        });
+		}
+		// $("#loadingmodal").modal('hide');
+		// continue functionality---------------
+		function fetchData()
+		{
+			var in_state=$("#selState").val();
+			var in_zone=$("#selZone").val();
+			var in_inst=$("#selInstitute").val();
+			var in_gender=$("#selGender").val();
+			var in_noti=$("#selnoti").val();
+			var in_trade=$("#seltrade").val();
+			updateStateData(in_state,in_zone,in_inst,in_gender,in_noti,in_trade);
+			// $("#loadingmodal").modal('hide');
+			updateSummarycards(in_state,in_zone,in_inst);
+
+		}
+		
+    </script>
+</body>
+</html>
+
+
+
+
+
